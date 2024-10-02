@@ -24,12 +24,12 @@ export default function Header() {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink className="menu-item menu-item-books" to="/">
+                                <NavLink className="menu-item menu-item-books" to="/books">
                                     Books
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink className="menu-item menu-item-about" to="/">
+                                <NavLink className="menu-item menu-item-about" to="/about">
                                     About
                                 </NavLink>
                             </li>

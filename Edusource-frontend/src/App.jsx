@@ -1,19 +1,49 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Header from './components/Header/Header'; // Adjust this path based on your file structure
 import Footer from './components/Footer/Footer';
 import Home from './components/Home/Home';
+import Books from './components/Books/Books'
+import About, { githubInfoLoader } from './components/About/About';
+
+// Create the routes using createBrowserRouter
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: (
+            <>
+                <Header />
+                <Home />
+                <Footer />
+            </>
+        ),
+    },
+    {
+        path: '/about',
+        element: (
+            <>
+                <Header />
+                <About />
+                <Footer />
+            </>
+        ),
+        loader: githubInfoLoader,
+    },{
+        path: '/books',
+        element: (
+            <>
+                <Header />
+                <Books />
+                <Footer />
+            </>
+        ),
+        loader: githubInfoLoader,
+    },
+]);
 
 function App() {
     return (
-        <Router>
-            <Header />
-            <Routes>
-                {}
-                <Route path="/" element={<Home />} />
-                {}
-            </Routes>
-            <Footer />
-        </Router>
+        <RouterProvider router={router} />
     );
 }
 

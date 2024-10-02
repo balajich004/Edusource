@@ -1,19 +1,25 @@
-.footer {
-    position: fixed;  
-    bottom: 0;        
-    left: 0;          
-    right: 0;         
-    background-color: white;  
-    border-top: 1px solid #e5e7eb;  
-    padding: 1.5rem 0;   
-    z-index: 1000;      
-    font-family: Arial, Helvetica, sans-serif;
+
+html, body {
+    height: 100%;
+    margin: 0; 
+}
+
+.app-container {
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh; 
 }
 
 .main-content {
-    padding-bottom: 3rem; 
+    flex: 1; /* This allows the content to grow and take available space */
 }
- 
+
+.footer {
+    background-color: white;
+    border-top: 1px solid #e5e7eb; /* Top border for footer */
+    padding: 1.5rem 0; /* Padding for top and bottom */
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 .container {
     max-width: 1200px; 
