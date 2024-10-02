@@ -37,10 +37,10 @@ export default function Header() {
                         
                     </div>
                     <div className="auth-links">
-                        <Link to="#" className="login-link">
+                        <Link to="/login" className="login-link">
                             Log in
                         </Link>
-                        <Link to="#" className="get-started-link">
+                        <Link to="/signup" className="get-started-link">
                             Get started
                         </Link>
                     </div>

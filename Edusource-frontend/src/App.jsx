@@ -4,7 +4,9 @@ import Header from './components/Header/Header'; // Adjust this path based on yo
 import Footer from './components/Footer/Footer';
 import Home from './components/Home/Home';
 import Books from './components/Books/Books'
+import Login from "./components/Login/Login"
 import About, { githubInfoLoader } from './components/About/About';
+import Signup from './components/Signup/Signup';
 
 // Create the routes using createBrowserRouter
 const router = createBrowserRouter([
@@ -38,6 +40,21 @@ const router = createBrowserRouter([
             </>
         ),
         loader: githubInfoLoader,
+    }, {
+        path: '/login',
+        element: (
+            <>
+                <Login />
+            </>
+        ),
+    },
+    {
+        path: '/signup',
+        element: (
+            <>
+                <Signup />
+            </>
+        ),
     },
 ]);
 
