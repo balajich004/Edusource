@@ -1,4 +1,7 @@
 package com.edusource.ebookmanagementsystem.service;
 
-public class AuthService {
+import com.edusource.ebookmanagementsystem.response.SignupRequest;
+
+public interface AuthService {
+    String createUser(SignupRequest req);
 }
