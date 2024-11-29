@@ -8,6 +8,5 @@ import java.util.Optional;
 
 public interface ReadBookRepository extends JpaRepository<ReadBook,Long> {
 
-//    Optional<ReadBook> findByUserId(String bookTitle);
-
+    Optional<ReadBook> findByUserIdAndBookId(Long userId, Long bookId);
 }

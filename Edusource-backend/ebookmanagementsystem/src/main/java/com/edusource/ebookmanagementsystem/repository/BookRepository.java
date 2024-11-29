@@ -10,4 +10,6 @@ public interface BookRepository extends JpaRepository<Book,Long> {
 
     @Query("SELECT DISTINCT b.bookType FROM Book b")
     List<String> findDistinctBookTypes();
+
+    List<Book> findByBookTitleContainingIgnoreCase(String title);
 }

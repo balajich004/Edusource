@@ -12,6 +12,21 @@ import java.util.stream.Collectors;
 
 public class MappingUtils {
 
+    public static UserDto mapUserReadingHistoryToUserDto(User user) {
+        UserDto userDto = mapUserModelToUserDto(user); // Map basic user details
+
+        // Map reading history (readBooks)
+        if (user.getReadBooks() != null && !user.getReadBooks().isEmpty()) {
+            userDto.setReadBooks(user.getReadBooks().stream()
+                    .map(MappingUtils::mapReadBookModelToReadBookDto)
+                    .collect(Collectors.toList()));
+        }
+
+        return userDto;
+    }
+
+
+
     // Method to map a list of User entities to a list of UserDTOs
     public static List<UserDto> mapUserListEntityToUserListDTO(List<User> userList) {
         return userList.stream()
