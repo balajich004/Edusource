@@ -29,10 +29,10 @@ public class ReadBookServiceImplementation implements ReadBookService {
     private ReadBookRepository readBookRepository;
 
     @Override
-    public Response getUserReadingHistory(Long userId) {
+    public Response getUserReadingHistory(String email) {
         Response response = new Response();
         try {
-            User user = userRepository.findById(userId)
+            User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new OurException("User not found"));
 
             List<ReadBookDto> readingHistory = MappingUtils.mapReadBookEntityToReadBookDTO(user.getReadBooks());
@@ -50,10 +50,10 @@ public class ReadBookServiceImplementation implements ReadBookService {
     }
 
     @Override
-    public Response addBookToUserReadingList(Long userId, Long bookId) {
+    public Response addBookToUserReadingList(String email, Long bookId) {
         Response response = new Response();
         try {
-            User user = userRepository.findById(userId)
+            User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new OurException("User not found"));
 
             Book book = bookRepository.findById(bookId)
@@ -77,13 +77,14 @@ public class ReadBookServiceImplementation implements ReadBookService {
     }
 
     @Override
-    public Response removeBookFromUserReadingList(Long userId, Long bookId) {
+    public Response removeBookFromUserReadingList(String email, Long bookId) {
         Response response = new Response();
         try {
-            User user = userRepository.findById(userId)
+            User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new OurException("User not found"));
 
-            ReadBook readBook = readBookRepository.findByUserIdAndBookId(userId, bookId)
+
+            ReadBook readBook = readBookRepository.findByUserIdAndBookId(user.getId(),bookId)
                     .orElseThrow(() -> new OurException("Book not found in reading list"));
 
             readBookRepository.delete(readBook);

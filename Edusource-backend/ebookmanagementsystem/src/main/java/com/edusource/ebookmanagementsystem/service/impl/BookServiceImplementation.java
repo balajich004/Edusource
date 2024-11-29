@@ -27,7 +27,7 @@ public class BookServiceImplementation implements BookService {
     private AWSS3Service awsS3Utils;
 
     @Override
-    public Response addNewBook(Long bookId, String description, String bookType, String bookTitle, MultipartFile bookPhoto, MultipartFile bookFile) {
+    public Response addNewBook(String description, String bookType, String bookTitle, MultipartFile bookPhoto, MultipartFile bookFile) {
         Response response = new Response();
 
         try {
@@ -37,7 +37,7 @@ public class BookServiceImplementation implements BookService {
 
             // Create and save the new book
             Book book = new Book();
-            book.setId(bookId);
+//            book.setId(bookId);
             book.setBookDescription(description);
             book.setBookType(bookType);
             book.setBookTitle(bookTitle);

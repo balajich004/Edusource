@@ -7,6 +7,7 @@ import com.edusource.ebookmanagementsystem.model.Book;
 import com.edusource.ebookmanagementsystem.model.ReadBook;
 import com.edusource.ebookmanagementsystem.model.User;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,15 +58,22 @@ public class MappingUtils {
         userDto.setPhone(user.getPhone());
         userDto.setRole(user.getRole());
 
-        // Map and set the reading list (readBooks) for the user
-        if (user.getReadBooks() != null && !user.getReadBooks().isEmpty()) {
-            userDto.setReadBooks(user.getReadBooks().stream()
-                    .map(MappingUtils::mapReadBookModelToReadBookDto)
-                    .collect(Collectors.toList()));
+        // Safely map the reading list (readBooks) for the user
+        if (user.getReadBooks() != null) {
+            if (!user.getReadBooks().isEmpty()) {
+                userDto.setReadBooks(user.getReadBooks().stream()
+                        .map(MappingUtils::mapReadBookModelToReadBookDto)
+                        .collect(Collectors.toList()));
+            } else {
+                userDto.setReadBooks(Collections.emptyList()); // Ensure it's never null
+            }
+        } else {
+            userDto.setReadBooks(Collections.emptyList()); // Fallback if readBooks is null
         }
 
         return userDto;
     }
+
 
     // Method to map a single Book entity to BookDTO
     public static BookDto mapBookModelToBookDto(Book book) {

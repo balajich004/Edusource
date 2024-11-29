@@ -9,14 +9,15 @@ import com.edusource.ebookmanagementsystem.repository.UserRepository;
 import com.edusource.ebookmanagementsystem.service.UserService;
 import com.edusource.ebookmanagementsystem.util.JWTUtils;
 import com.edusource.ebookmanagementsystem.util.MappingUtils;
-import org.aspectj.weaver.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserServiceImplementation implements UserService {
 
     @Autowired
@@ -57,7 +58,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public Response login(User userLoginRequest) {
+    public Response login(LoginRequest userLoginRequest) {
         Response response=new Response();
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLoginRequest.getEmail(),userLoginRequest.getPassword()));

@@ -8,7 +8,7 @@ public interface UserService {
 
     Response register(User user);
 
-    Response login(User userLoginRequest);
+    Response login(LoginRequest userLoginRequest);
 
     Response getAllUsers();
 

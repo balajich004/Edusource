@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface BookService {
-    Response addNewBook(Long bookId, String description, String bookType, String bookTitle, MultipartFile bookPhoto,MultipartFile bookFile);
+    Response addNewBook(String description, String bookType, String bookTitle, MultipartFile bookPhoto,MultipartFile bookFile);
 
     List<String> getAllBookTypes();
 
