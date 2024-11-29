@@ -1,58 +1,89 @@
 package com.edusource.ebookmanagementsystem.model;
 
-import com.edusource.ebookmanagementsystem.domain.USER_ROLE;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class User {
+@Table(name="users")
+public class User implements UserDetails {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
-
+    @NotBlank(message = "Your email is required")
+    @Column(unique = true)
     private String email;
 
-    private String fullname;
+    @NotBlank(message = "Your name is required")
+    private String name;
 
-    public USER_ROLE getRole() {
-        return role;
+    @NotBlank(message = "Your phone no. is required")
+    private String phone;
+
+    @NotBlank(message = "Your password is required and please remember it")
+    private String password;
+
+    private String role;
+
+    private List<ReadBook> readBooks=new ArrayList<>();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
-    public void setRole(USER_ROLE role) {
-        this.role = role;
-    }
-
+    @Override
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String getUsername() {
+        return email;
     }
 
-    public String getMobileno() {
-        return mobileno;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setMobileno(String mobileno) {
-        this.mobileno = mobileno;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public String getFullname() {
-        return fullname;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public List<ReadBook> getReadBooks() {
+        return readBooks;
+    }
+
+    public void setReadBooks(List<ReadBook> readBooks) {
+        this.readBooks = readBooks;
+    }
+
+    public @NotBlank(message = "Your email is required") String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotBlank(message = "Your email is required") String email) {
+        this.email = email;
     }
 
     public Long getId() {
@@ -63,17 +94,31 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public @NotBlank(message = "Your name is required") String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(@NotBlank(message = "Your name is required") String name) {
+        this.name = name;
     }
 
-    private String mobileno;
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    private USER_ROLE role=USER_ROLE.ROLE_READER;
+    public @NotBlank(message = "Your phone no. is required") String getPhone() {
+        return phone;
+    }
 
-//    private Set<Book> readBooks=new HashSet<>();
+    public void setPhone(@NotBlank(message = "Your phone no. is required") String phone) {
+        this.phone = phone;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

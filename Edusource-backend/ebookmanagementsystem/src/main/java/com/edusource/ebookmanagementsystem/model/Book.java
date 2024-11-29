@@ -2,60 +2,44 @@ package com.edusource.ebookmanagementsystem.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
+@Table(name="books")
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String bookType;
 
-    private String description;
+    private String bookTitle;
 
-    private String genre;
+    private String bookPhotoUrl;
 
-    public List<String> getImages() {
-        return images;
+    private String bookDescription;
+
+    public String getBookPhotoUrl() {
+        return bookPhotoUrl;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setBookPhotoUrl(String bookPhotoUrl) {
+        this.bookPhotoUrl = bookPhotoUrl;
     }
 
-    public Author getAuthor() {
-        return author;
+    public String getBookType() {
+        return bookType;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setBookType(String bookType) {
+        this.bookType = bookType;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getBookDescription() {
+        return bookDescription;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setBookDescription(String description) {
+        this.bookDescription = bookDescription;
     }
 
     public Long getId() {
@@ -66,30 +50,22 @@ public class Book {
         this.id = id;
     }
 
-    public int getRatings() {
-        return ratings;
+    public String getBookTitle() {
+        return bookTitle;
     }
 
-    public void setRatings(int ratings) {
-        this.ratings = ratings;
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 
-    public String getTitle() {
-        return title;
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookDescription='" + bookDescription + '\'' +
+                ", id=" + id +
+                ", bookType='" + bookType + '\'' +
+                ", bookTitle='" + bookTitle + '\'' +
+                ", bookPhotoUrl='" + bookPhotoUrl + '\'' +
+                '}';
     }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @ElementCollection
-    private List<String> images=new ArrayList<>();
-
-    private int ratings;
-
-    @ManyToOne
-    private Category category;
-
-    @ManyToOne
-    private Author author;
 }
