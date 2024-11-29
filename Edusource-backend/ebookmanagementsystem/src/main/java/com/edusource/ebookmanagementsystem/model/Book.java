@@ -16,6 +16,8 @@ public class Book {
 
     private String bookPhotoUrl;
 
+    private String bookFileUrl;
+
     private String bookDescription;
 
     public String getBookPhotoUrl() {
@@ -58,6 +60,14 @@ public class Book {
         this.bookTitle = bookTitle;
     }
 
+    public String getBookFileUrl() {
+        return bookFileUrl;
+    }
+
+    public void setBookFileUrl(String bookFileUrl) {
+        this.bookFileUrl = bookFileUrl;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -66,6 +76,7 @@ public class Book {
                 ", bookType='" + bookType + '\'' +
                 ", bookTitle='" + bookTitle + '\'' +
                 ", bookPhotoUrl='" + bookPhotoUrl + '\'' +
+                ", bookFileUrl='" + bookFileUrl + '\'' +
                 '}';
     }
 }

@@ -14,6 +14,16 @@ public class BookDto {
 
     private String bookTitle;
 
+    private String bookFileUrl;
+
+    public String getBookFileUrl() {
+        return bookFileUrl;
+    }
+
+    public void setBookFileUrl(String bookFileUrl) {
+        this.bookFileUrl = bookFileUrl;
+    }
+
     public String getBookDescription() {
         return bookDescription;
     }
