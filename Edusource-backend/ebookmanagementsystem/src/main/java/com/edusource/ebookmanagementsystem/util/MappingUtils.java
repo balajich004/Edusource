@@ -69,7 +69,7 @@ public class MappingUtils {
         ReadBookDto readBookDto = new ReadBookDto();
         readBookDto.setId(readBook.getId());
         readBookDto.setBookDto(mapBookModelToBookDto(readBook.getBook()));
-        readBookDto.setUserDto(mapUserModelToUserDto(readBook.getUser()));  
+        readBookDto.setUserDto(mapUserModelToUserDto(readBook.getUser()));
         return readBookDto;
     }
 }
