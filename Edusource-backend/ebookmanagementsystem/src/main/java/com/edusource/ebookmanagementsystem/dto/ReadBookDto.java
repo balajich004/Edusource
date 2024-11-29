@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
 public class ReadBookDto {
+
+    private Long id;
+
     private UserDto userDto;
 
     private BookDto bookDto;
@@ -24,5 +27,13 @@ public class ReadBookDto {
 
     public void setUserDto(UserDto userDto) {
         this.userDto = userDto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -33,6 +33,7 @@ public class User implements UserDetails {
 
     private String role;
 
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ReadBook> readBooks=new ArrayList<>();
 
     @Override

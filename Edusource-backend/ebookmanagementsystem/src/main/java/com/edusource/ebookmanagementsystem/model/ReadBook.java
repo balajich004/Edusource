@@ -3,7 +3,7 @@ package com.edusource.ebookmanagementsystem.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="readbooks")
+@Table(name="readBooks")
 public class ReadBook {
     public User getUser() {
         return user;
@@ -29,11 +29,24 @@ public class ReadBook {
     @JoinColumn(name="book_id")
     private Book book;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "ReadBook{" +
                 "book=" + book +
                 ", user=" + user +
+                ", id=" + id +
                 '}';
     }
 }

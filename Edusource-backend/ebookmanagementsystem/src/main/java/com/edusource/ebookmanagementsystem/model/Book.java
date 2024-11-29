@@ -39,7 +39,7 @@ public class Book {
     }
 
     public void setBookDescription(String description) {
-        this.bookDescription = bookDescription;
+        this.bookDescription = description;
     }
 
     public Long getId() {
