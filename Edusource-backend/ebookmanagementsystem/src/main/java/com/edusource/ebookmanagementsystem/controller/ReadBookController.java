@@ -33,6 +33,17 @@ public class ReadBookController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
+    @GetMapping("/reading-list")
+    public ResponseEntity<Response> getMyReadingList(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Response response = readBookService.getUserReadingHistory(email);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body(response);
+
+    }
+
     // Remove a book from the user's reading list
     @DeleteMapping("/remove/{bookId}")
     public ResponseEntity<Response> removeBookFromReadingList(@PathVariable Long bookId) {

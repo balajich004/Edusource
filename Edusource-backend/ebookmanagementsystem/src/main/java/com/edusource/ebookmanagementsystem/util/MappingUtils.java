@@ -88,11 +88,25 @@ public class MappingUtils {
     }
 
     // Method to map a single ReadBook entity to ReadBookDTO
+//    public static ReadBookDto mapReadBookModelToReadBookDto(ReadBook readBook) {
+//        ReadBookDto readBookDto = new ReadBookDto();
+//        readBookDto.setId(readBook.getId());
+//        readBookDto.setBookDto(mapBookModelToBookDto(readBook.getBook()));
+//        readBookDto.setUserDto(mapUserModelToUserDto(readBook.getUser()));
+//        return readBookDto;
+//    }
+
     public static ReadBookDto mapReadBookModelToReadBookDto(ReadBook readBook) {
         ReadBookDto readBookDto = new ReadBookDto();
         readBookDto.setId(readBook.getId());
         readBookDto.setBookDto(mapBookModelToBookDto(readBook.getBook()));
-        readBookDto.setUserDto(mapUserModelToUserDto(readBook.getUser()));
+
+        // Simplify user mapping to avoid recursion
+        UserDto userDto = new UserDto();
+        userDto.setId(readBook.getUser().getId());
+        userDto.setName(readBook.getUser().getName());
+        readBookDto.setUserDto(userDto);
+
         return readBookDto;
     }
 }

@@ -100,4 +100,33 @@ public class ReadBookServiceImplementation implements ReadBookService {
         }
         return response;
     }
+
+    @Override
+    public Response getReadingList(User user) {
+        Response response = new Response();
+        try {
+            // Validate the user exists
+            User foundUser = userRepository.findByEmail(user.getEmail())
+                    .orElseThrow(() -> new OurException("User not found"));
+
+            // Fetch the reading list for the user
+            List<ReadBook> readingList = readBookRepository.findByUserId(foundUser.getId());
+
+            // Map the list of ReadBook entities to ReadBookDto for the response
+            List<ReadBookDto> readingListDto = MappingUtils.mapReadBookEntityToReadBookDTO(readingList);
+
+            // Build and return the response
+            response.setStatusCode(200);
+            response.setMessage("Reading list fetched successfully");
+            response.setReadBookList(readingListDto);
+        } catch (OurException e) {
+            response.setStatusCode(404);
+            response.setMessage(e.getMessage());
+        } catch (Exception e) {
+            response.setStatusCode(500);
+            response.setMessage("Error fetching reading list: " + e.getMessage());
+        }
+        return response;
+    }
+
 }

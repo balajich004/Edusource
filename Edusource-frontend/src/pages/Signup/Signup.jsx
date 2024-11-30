@@ -28,15 +28,28 @@ function Signup() {
 
         <label htmlFor="isAuthor">Are you an author?</label>
         <div className="radio-buttons">
-          <label>
-            <input type="radio" name="isAuthor" value="yes" required /> Yes
+          <label htmlFor="isAuthorYes">
+            <input 
+              type="radio" 
+              id="isAuthorYes" 
+              name="isAuthor" 
+              value="yes" 
+              required 
+            /> 
+            Yes
           </label>
-          <label>
-            <input type="radio" name="isAuthor" value="no" /> No
+          <label htmlFor="isAuthorNo">
+            <input 
+              type="radio" 
+              id="isAuthorNo" 
+              name="isAuthor" 
+              value="no" 
+            /> 
+            No
           </label>
         </div>
 
-        <div className="signup-butt"><button type="submit">Signup</button></div>
+        <div className="signup-butt"><Link to="/login" type="submit" style={{textDecoration:"none",backgroundColor:"#ea580c",padding:"0.6rem",color:"white",borderRadius:"8px"}}>Signup</Link></div>
 
         <div className="login-butt"><Link to="/login">Already have an account? Login</Link></div>
         <div className="back-butt"><Link to="/">Go back to home</Link></div>
@@ -46,3 +59,8 @@ function Signup() {
 }
 
 export default Signup;
+
+
+
+
+

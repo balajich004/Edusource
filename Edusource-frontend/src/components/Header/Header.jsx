@@ -1,51 +1,26 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import "./Header.css"; // Import the CSS file
-import logoImg from "../../images/logo.png";
-
-export default function Header() {
-    return (
-        <header className="header-container">
-            <nav className="navbar">
-                <div className="navbar-inner">
-                    <Link to="/" className="logo-link">
-                        <img
-                            src={logoImg}
-                            className="logo"
-                            alt="Logo"
-                        />
-                    </Link>
-                    
-                    <div className="menu" id="mobile-menu-2">
-                        <ul className="menu-list">
-                            <li>
-                                <NavLink className="menu-item menu-item-home" to="/">
-                                    Home
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink className="menu-item menu-item-books" to="/books">
-                                    Books
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink className="menu-item menu-item-about" to="/about">
-                                    About
-                                </NavLink>
-                            </li>
-                        </ul>
-                        
-                    </div>
-                    <div className="auth-links">
-                        <Link to="/login" className="login-link">
-                            Log in
-                        </Link>
-                        <Link to="/signup" className="get-started-link">
-                            Get started
-                        </Link>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    );
+import React from 'react'
+import homep from "../../images/home.png"
+import '../../pages/Home/Home.css'
+import { Link } from 'react-router-dom'
+function Header() {
+  return (
+    <div className="sub-home">
+      <div className="home-text">
+        <div className="home-main-text">
+          Explore the world through <span className='books'>Books</span>
+        </div>
+        <div className="home-sub-text">
+        A good book is like a conversation with the finest minds of the past and present. It captivates, enlightens, and enriches, leaving a lasting imprint on your heart. Discover the power of stories that transcend time and space.
+        </div>
+        <div className="home-sub-btn" style={{marginTop:"10px"}}>
+          <Link to="/books" className='hsb' style={{textDecoration:"none",color:"black"}}>Explore now</Link>
+        </div>
+      </div>
+      <div className="home-logo">
+        <img src={homep} alt="there used to be homep" />
+        </div>
+      </div>
+  )
 }
+
+export default Header
