@@ -82,9 +82,11 @@ const BookSearch = ({ handleSearchResult }) => {
           ))}
         </select>
       </div>
-      <button className="home-search-button" onClick={handleSearch}>
+      <div className="sbutton">
+        <button className="home-search-button" onClick={handleSearch}>
         Search
-      </button>
+        </button>
+      </div>
       {error && <p className="error-message">{error}</p>}
     </section>
   );

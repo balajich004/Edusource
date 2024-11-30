@@ -4,9 +4,12 @@ import BookResult from '../../components/BookResult/BookResult';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import ApiService from '../../service/ApiService';
+import Pagination from '../../components/Pagination/Pagination';
 
 function Books() {
   const [bookSearchResults, setBookSearchResults] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [booksPerPage] = useState(5); // Number of books to display per page
 
   // Fetch all books on component mount
   useEffect(() => {
@@ -27,13 +30,27 @@ function Books() {
 
   const handleSearchResult = (results) => {
     setBookSearchResults(results);
+    setCurrentPage(1); // Reset to first page on new search
   };
+
+  // Calculate the books to display for the current page
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const currentBooks = bookSearchResults.slice(indexOfFirstBook, indexOfLastBook);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
       <Navbar />
       <BookSearch handleSearchResult={handleSearchResult} />
-      <BookResult bookSearchResults={bookSearchResults} />
+      <BookResult bookSearchResults={currentBooks} />
+      <Pagination
+        itemsPerPage={booksPerPage}
+        totalItems={bookSearchResults.length}
+        currentPage={currentPage}
+        paginate={paginate}
+      />
       <Footer />
     </>
   );
