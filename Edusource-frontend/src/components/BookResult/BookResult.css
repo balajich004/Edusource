@@ -1,0 +1,57 @@
+.book-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  .book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .book-list-item {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .book-list-item-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .book-details {
+    margin-top: 10px;
+    color: #4b5563;
+  }
+  
+  .action-buttons {
+    margin-top: 10px;
+  }
+  
+  .edit-book-button,
+  .view-download-button {
+    background-color: #ea580c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .edit-book-button:hover,
+  .view-download-button:hover {
+    background-color: #ea580c;
+  }
+  

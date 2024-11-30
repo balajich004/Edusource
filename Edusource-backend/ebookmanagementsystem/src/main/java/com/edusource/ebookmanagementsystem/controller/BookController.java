@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -52,11 +54,12 @@ public class BookController {
         return bookService.getAllBookTypes();
     }
 
-    @GetMapping("/book-by-id/{bookTitle}")
-    public ResponseEntity<Response> getRoomById(@PathVariable String bookTitle) {
-        Response response =bookService.getBookByTitle(bookTitle);
+    @GetMapping("/book-by-id")
+    public ResponseEntity<Response> getBookById(@RequestParam String bookTitle) {
+        Response response = bookService.getBookByTitle(bookTitle);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
 
     @PutMapping("/update/{bookId}")
     @PreAuthorize("hasAuthority('ADMIN')")
