@@ -4,7 +4,8 @@ import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer";
 
 function About() {
-  const [data, setData] = useState({}); // Initialize state
+  const [data, setData] = useState({});
+  const [surya,setSurya]=useState({}) // Initialize state
 
   
   useEffect(() => {
@@ -22,6 +23,23 @@ function About() {
     };
 
     fetchGithubInfo();
+  }, []); 
+
+  useEffect(() => {
+    const fetchGithubInfosurya = async () => {
+      try {
+        const response = await fetch("https://api.github.com/users/SuryaTeja275");
+        if (!response.ok) {
+          throw new Error("Failed to fetch GitHub user info");
+        }
+        const userData = await response.json();
+        setSurya(userData); 
+      } catch (error) {
+        console.error("Error fetching GitHub info:", error);
+      }
+    };
+
+    fetchGithubInfosurya();
   }, []); 
 
   return (
@@ -53,6 +71,32 @@ function About() {
               </div>
             </div>
           </div>
+
+          <div className="card card-1">
+            <div className="image-card">
+              <img
+                src={surya.avatar_url || ""}
+                alt={`${surya.login || "User"}'s avatar`}
+                id="card-img"
+              />
+            </div>
+            <div className="crd-text">
+              <div className="card-user">Github username: {surya.login || "N/A"}</div>
+              <div className="card-bio">{surya.bio || "No bio available"}</div>
+              <div className="fo-wrapper">
+                <div className="nof">
+                  No. of followers <br />
+                  <div className="sub-nof">{surya.followers || 0}</div>
+                </div>
+                <div className="nofing">
+                  No. of following <br />
+                  <div className="sub-nofing">{surya.following || 0}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
         </div>
         <h1>About Us</h1>
         <div className="about-us-container">

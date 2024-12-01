@@ -25,7 +25,7 @@ public class BookController {
 
     @PostMapping("/add")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Response> addNewRoom(
+    public ResponseEntity<Response> addNewBook(
             @RequestParam(value = "photo", required = false) MultipartFile bookPhoto,
             @RequestParam(value = "pdf", required = false) MultipartFile bookFile,
             @RequestParam(value = "bookType", required = false) String bookType,
@@ -44,13 +44,13 @@ public class BookController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Response> getAllRooms() {
+    public ResponseEntity<Response> getAllBooks() {
         Response response = bookService.getAllBooks();
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @GetMapping("/types")
-    public List<String> getRoomTypes() {
+    public List<String> getBookTypes() {
         return bookService.getAllBookTypes();
     }
 
