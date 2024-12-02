@@ -13,6 +13,8 @@ import ManageBooks from './pages/ManageBooks/ManageBooks';
 import AddBook from './pages/AddBook/AddBook';
 import ViewBooks from './pages/ViewBooks/ViewBooks';
 import UpdateBook from './pages/UpdateBook/UpdateBook';
+import ReadingList from './pages/ReadingList/ReadingList';
+import ManageUsers from './pages/ManageUsers/ManageUsers';
 function App() {
     return (
         <div>
@@ -30,6 +32,8 @@ function App() {
                 <Route path="/admin/add-book" element={<AddBook />} />
                 <Route path="/admin/view-books" element={<ViewBooks />} />
                 <Route path="/admin/update-book/:bookId" element={<UpdateBook />} />
+                <Route path='/reading-list' element={<ReadingList />} />
+                <Route path='/admin/manage-users' element={<ManageUsers />} />
             </Routes>
         </div>
     );

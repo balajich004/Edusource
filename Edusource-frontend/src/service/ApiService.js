@@ -174,4 +174,10 @@ export default class ApiService {
     const role = localStorage.getItem("role");
     return role === "USER";
   }
+  static async addBookToReadingHistory(bookId) {
+    const response = await axios.post(`${this.BASE_URL}/readBooks/add-to-history/${bookId}`, {}, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
 }

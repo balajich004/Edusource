@@ -129,4 +129,32 @@ public class ReadBookServiceImplementation implements ReadBookService {
         return response;
     }
 
+    @Override
+    public Response addBookToUserReadingHistory(String email, Long bookId) {
+        Response response = new Response();
+        try {
+            User user = userRepository.findByEmail(email)
+                    .orElseThrow(() -> new OurException("User not found"));
+
+            Book book = bookRepository.findById(bookId)
+                    .orElseThrow(() -> new OurException("Book not found"));
+
+            ReadBook readBook = new ReadBook();
+            readBook.setUser(user);
+            readBook.setBook(book);
+            readBookRepository.save(readBook);
+
+            response.setStatusCode(201);
+            response.setMessage("Book added to reading history successfully");
+        } catch (OurException e) {
+            response.setStatusCode(404);
+            response.setMessage(e.getMessage());
+        } catch (Exception e) {
+            response.setStatusCode(500);
+            response.setMessage("Error adding book to reading history: " + e.getMessage());
+        }
+        return response;
+    }
+
+
 }

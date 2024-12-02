@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import ApiService from "../../service/ApiService";
 import "../ManageBooks/ManageBooks.css";
+import { useParams } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 
-const UpdateBook = ({ bookId }) => {
+const UpdateBook = () => {
+
+    const { bookId } = useParams();
     const [formData, setFormData] = useState({
         bookPhoto: null,
         bookFile: null,
@@ -41,23 +46,27 @@ const UpdateBook = ({ bookId }) => {
     };
 
     return (
+        <>
+        <Navbar />
         <div className="form-container">
             <h2>Update Book</h2>
             <form onSubmit={handleSubmit}>
                 <label>Book Photo:</label>
-                <input type="file" name="bookPhoto" onChange={handleInputChange} />
+                <input type="file" name="bookPhoto" onChange={handleInputChange} /><br />
                 <label>Book PDF:</label>
-                <input type="file" name="bookFile" onChange={handleInputChange} />
+                <input type="file" name="bookFile" onChange={handleInputChange} /><br />
                 <label>Book Type:</label>
-                <input type="text" name="bookType" value={formData.bookType} onChange={handleInputChange} />
+                <input type="text" name="bookType" value={formData.bookType} onChange={handleInputChange} /><br />
                 <label>Book Title:</label>
-                <input type="text" name="bookTitle" value={formData.bookTitle} onChange={handleInputChange} />
+                <input type="text" name="bookTitle" value={formData.bookTitle} onChange={handleInputChange} /><br />
                 <label>Book Description:</label>
                 <textarea name="bookDescription" value={formData.bookDescription} onChange={handleInputChange} />
                 <button type="submit">Update Book</button>
             </form>
             {message && <p className="message">{message}</p>}
         </div>
+        <Footer />
+        </>
     );
 };
 

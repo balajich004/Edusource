@@ -11,4 +11,6 @@ public interface ReadBookService {
     Response removeBookFromUserReadingList(String email, Long bookId);
 
     Response getReadingList(User user);
+
+    Response addBookToUserReadingHistory(String email, Long bookId);
 }

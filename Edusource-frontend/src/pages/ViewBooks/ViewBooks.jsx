@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ApiService from "../../service/ApiService";
+import './ViewBooks.css';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
 const ViewBooks = () => {
     const [books, setBooks] = useState([]);
@@ -22,7 +25,23 @@ const ViewBooks = () => {
         fetchBooks();
     }, []);
 
+    const handleDelete = async (bookId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this book?");
+        if (confirmDelete) {
+            try {
+                const response = await ApiService.deleteBook(bookId);
+                if (response.statusCode === 200) {
+                    setBooks(books.filter(book => book.id !== bookId)); // Remove the book from the list after deletion
+                }
+            } catch (error) {
+                setError("Failed to delete book.");
+            }
+        }
+    };
+
     return (
+        <>
+        <Navbar />
         <div className="view-books">
             <h2>View All Books</h2>
             {error && <p className="error-message">{error}</p>}
@@ -34,6 +53,7 @@ const ViewBooks = () => {
                             <th>Type</th>
                             <th>Description</th>
                             <th>Image</th>
+                            <th>Actions</th> {/* Added Actions column */}
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +69,14 @@ const ViewBooks = () => {
                                         className="book-photo"
                                     />
                                 </td>
+                                <td>
+                                    <button
+                                        className="delete-button"
+                                        onClick={() => handleDelete(book.id)} // Added delete handler
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -57,6 +85,8 @@ const ViewBooks = () => {
                 <p>No books available.</p>
             )}
         </div>
+        <Footer />
+        </>
     );
 };
 

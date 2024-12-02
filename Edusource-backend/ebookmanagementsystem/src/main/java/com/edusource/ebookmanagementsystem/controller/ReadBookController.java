@@ -52,4 +52,14 @@ public class ReadBookController {
         Response response = readBookService.removeBookFromUserReadingList(email, bookId);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
+    // Add a book to the user's reading history when they view it
+    @PostMapping("/history/add/{bookId}")
+    public ResponseEntity<Response> addBookToReadingHistory(@PathVariable Long bookId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Response response = readBookService.addBookToUserReadingHistory(email, bookId);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+
 }

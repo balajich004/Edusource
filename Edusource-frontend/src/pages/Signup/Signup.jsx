@@ -10,10 +10,10 @@ function Signup() {
     email: "",
     phone: "",
     password: "",
-    isAuthor: false,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -21,15 +21,29 @@ function Signup() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { name, email, phone, password, isAuthor } = formData;
+    const { name, email, phone, password } = formData;
 
     if (!name || !email || !phone || !password) {
       setErrorMessage("Please fill in all fields.");
       setTimeout(() => setErrorMessage(""), 5000);
       return;
+    }
+
+    if (!validatePassword(password)) {
+      setPasswordError(
+        "Password must contain at least 1 uppercase letter, 1 digit, 1 special character, and be at least 8 characters long."
+      );
+      return;
+    } else {
+      setPasswordError("");
     }
 
     try {
@@ -38,11 +52,10 @@ function Signup() {
         email,
         phone,
         password,
-        isAuthor,
       });
 
       if (response.statusCode === 200) {
-        setFormData({ name: "", email: "", phone: "", password: "", isAuthor: false });
+        setFormData({ name: "", email: "", phone: "", password: "" });
         setSuccessMessage("User registered successfully");
         setTimeout(() => {
           setSuccessMessage("");
@@ -59,9 +72,11 @@ function Signup() {
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
         <img src={logoimg} alt="Logo" />
-        <h2 style={{ textAlign: "center" }}>Create your account</h2>
+        <h2>Create your account</h2>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {passwordError && <p className="error-message">{passwordError}</p>}
         {successMessage && <p className="success-message">{successMessage}</p>}
+        <div className="name">
         <label htmlFor="name">
           Name:
           <input
@@ -70,9 +85,12 @@ function Signup() {
             name="name"
             value={formData.name}
             onChange={handleInputChange}
+            placeholder="Enter your name"
             required
           />
         </label>
+        </div>
+        <div className="email">
         <label htmlFor="email">
           Email:
           <input
@@ -81,9 +99,12 @@ function Signup() {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
+            placeholder="Enter your email"
             required
           />
         </label>
+        </div>
+        <div className="phone">
         <label htmlFor="phone">
           Phone:
           <input
@@ -92,9 +113,12 @@ function Signup() {
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
+            placeholder="Enter your phone number"
             required
           />
         </label>
+        </div>
+        <div className="password">
         <label htmlFor="password">
           Password:
           <input
@@ -103,30 +127,14 @@ function Signup() {
             name="password"
             value={formData.password}
             onChange={handleInputChange}
+            placeholder="Enter your password"
             required
           />
+          <small>
+            Password must contain at least 1 uppercase letter, 1 digit, 1 special
+            character, and be at least 8 characters long.
+          </small>
         </label>
-        <label>Are you an author?</label>
-        <div className="radio-buttons">
-          <label>
-            <input
-              type="radio"
-              name="isAuthor"
-              value={true}
-              onChange={(e) => setFormData({ ...formData, isAuthor: e.target.value === "true" })}
-              required
-            />
-            Yes
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="isAuthor"
-              value={false}
-              onChange={(e) => setFormData({ ...formData, isAuthor: e.target.value === "true" })}
-            />
-            No
-          </label>
         </div>
         <div className="signup-butt">
           <button type="submit">Sign Up</button>

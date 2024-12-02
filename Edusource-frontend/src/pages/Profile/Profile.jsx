@@ -17,7 +17,7 @@ const Profile = () => {
                 const userProfile = await ApiService.getUserProfile();
                 setUser(userProfile.user);
 
-                const historyResponse = await ApiService.getReadingHistory();
+                const historyResponse = await ApiService.getMyReadingHistory();
                 setReadingHistory(historyResponse.readBookList);
             } catch (error) {
                 setError(error.response?.data?.message || error.message);

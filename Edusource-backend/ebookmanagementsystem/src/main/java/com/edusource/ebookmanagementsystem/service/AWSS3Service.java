@@ -61,25 +61,45 @@ public class AWSS3Service {
             throw new OurException("Unable to upload file to S3 bucket: " + e.getMessage());
         }
     }
-    public void deleteFileFromS3(String fileUrl) {
-        try {
-            // Extract file key from URL
-            String fileKey = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+//    public void deleteFileFromS3(String fileUrl) {
+//        try {
+//            // Extract file key from URL
+//            String fileKey = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+//
+//            BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
+//            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+//                    .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
+//                    .withRegion(Regions.US_EAST_1)
+//                    .build();
+//
+//            // Delete the file
+//            s3Client.deleteObject(bucketName, fileKey);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new OurException("Unable to delete file from S3 bucket: " + e.getMessage());
+//        }
+//    }
+public void deleteFileFromS3(String fileUrl) {
+    try {
+        // Extract file key from URL
+        String fileKey = fileUrl.replace("https://" + bucketName + ".s3.amazonaws.com/", "");
 
-            BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
-            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                    .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                    .withRegion(Regions.US_EAST_1)
-                    .build();
+        BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
+        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
+                .withRegion(Regions.US_EAST_1)
+                .build();
 
-            // Delete the file
-            s3Client.deleteObject(bucketName, fileKey);
+        // Delete the file
+        s3Client.deleteObject(bucketName, fileKey);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new OurException("Unable to delete file from S3 bucket: " + e.getMessage());
-        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        throw new OurException("Unable to delete file from S3 bucket: " + e.getMessage());
     }
+}
+
 }
 
 
