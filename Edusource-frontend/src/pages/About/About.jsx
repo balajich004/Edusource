@@ -5,7 +5,8 @@ import Footer from "../../components/Footer/Footer";
 
 function About() {
   const [data, setData] = useState({});
-  const [surya,setSurya]=useState({}) // Initialize state
+  const [surya,setSurya]=useState({});
+  const [jaisai,setJaiSai]=useState({});// Initialize state
 
   
   useEffect(() => {
@@ -41,6 +42,23 @@ function About() {
 
     fetchGithubInfosurya();
   }, []); 
+
+  useEffect(() => {
+    const fetchGithubInfoJaiSai = async () => {
+      try {
+        const response = await fetch("https://api.github.com/users/2200090121jai");
+        if (!response.ok) {
+          throw new Error("Failed to fetch GitHub user info");
+        }
+        const userData = await response.json();
+        setJaiSai(userData); 
+      } catch (error) {
+        console.error("Error fetching GitHub info:", error);
+      }
+    };
+
+    fetchGithubInfoJaiSai();
+  }, []);
 
   return (
     <>
@@ -91,6 +109,31 @@ function About() {
                 <div className="nofing">
                   No. of following <br />
                   <div className="sub-nofing">{surya.following || 0}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div className="card card-1">
+            <div className="image-card">
+              <img
+                src={jaisai.avatar_url || ""}
+                alt={`${jaisai.login || "User"}'s avatar`}
+                id="card-img"
+              />
+            </div>
+            <div className="crd-text">
+              <div className="card-user">Github username: {jaisai.login || "N/A"}</div>
+              <div className="card-bio">{jaisai.bio || "No bio available"}</div>
+              <div className="fo-wrapper">
+                <div className="nof">
+                  No. of followers <br />
+                  <div className="sub-nof">{jaisai.followers || 0}</div>
+                </div>
+                <div className="nofing">
+                  No. of following <br />
+                  <div className="sub-nofing">{jaisai.following || 0}</div>
                 </div>
               </div>
             </div>
